@@ -59,6 +59,8 @@ return [
             'last-name'                   => 'Last Name',
             'page-title'                  => 'Become User',
             'password'                    => 'Password',
+            'show-password'               => 'Show Password',
+            'hide-password'               => 'Hide Password',
             'sign-in-button'              => 'Sign In',
             'subscribe-to-newsletter'     => 'Subscribe to newsletter',
             'success'                     => 'Account created successfully.',
