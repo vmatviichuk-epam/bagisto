@@ -131,18 +131,29 @@
                             @lang('shop::app.customers.signup-form.password')
                         </x-shop::form.control-group.label>
 
-                        <x-shop::form.control-group.control
-                            type="password"
-                            class="px-6 py-4 max-md:py-3 max-sm:py-2"
-                            name="password"
-                            rules="required|min:6"
-                            :value="old('password')"
-                            :label="trans('shop::app.customers.signup-form.password')"
-                            :placeholder="trans('shop::app.customers.signup-form.password')"
-                            ref="password"
-                            :aria-label="trans('shop::app.customers.signup-form.password')"
-                            aria-required="true"
-                        />
+                        <div class="relative">
+                            <x-shop::form.control-group.control
+                                type="password"
+                                class="px-6 py-4 pr-12 max-md:py-3 max-sm:py-2"
+                                id="signup-password"
+                                name="password"
+                                rules="required|min:6"
+                                :value="old('password')"
+                                :label="trans('shop::app.customers.signup-form.password')"
+                                :placeholder="trans('shop::app.customers.signup-form.password')"
+                                :aria-label="trans('shop::app.customers.signup-form.password')"
+                                aria-required="true"
+                            />
+
+                            <span
+                                id="signup-password-toggle"
+                                class="icon-eye absolute top-1/2 -translate-y-1/2 transform cursor-pointer text-2xl text-zinc-500 hover:text-zinc-800 ltr:right-4 rtl:left-4"
+                                role="button"
+                                tabindex="0"
+                                onclick="togglePasswordVisibility('signup-password', 'signup-password-toggle')"
+                                aria-label="@lang('shop::app.customers.signup-form.show-password')"
+                            ></span>
+                        </div>
 
                         <x-shop::form.control-group.error control-name="password" />
                     </x-shop::form.control-group>
@@ -155,17 +166,28 @@
                             @lang('shop::app.customers.signup-form.confirm-pass')
                         </x-shop::form.control-group.label>
 
-                        <x-shop::form.control-group.control
-                            type="password"
-                            class="px-6 py-4 max-md:py-3 max-sm:py-2"
-                            name="password_confirmation"
-                            rules="confirmed:@password"
-                            value=""
-                            :label="trans('shop::app.customers.signup-form.password')"
-                            :placeholder="trans('shop::app.customers.signup-form.confirm-pass')"
-                            :aria-label="trans('shop::app.customers.signup-form.confirm-pass')"
-                            aria-required="true"
-                        />
+                        <div class="relative">
+                            <x-shop::form.control-group.control
+                                type="password"
+                                class="px-6 py-4 pr-12 max-md:py-3 max-sm:py-2"
+                                id="signup-password-confirmation"
+                                name="password_confirmation"
+                                rules="confirmed:@signup-password"
+                                :label="trans('shop::app.customers.signup-form.password')"
+                                :placeholder="trans('shop::app.customers.signup-form.confirm-pass')"
+                                :aria-label="trans('shop::app.customers.signup-form.confirm-pass')"
+                                aria-required="true"
+                            />
+
+                            <span
+                                id="signup-password-confirmation-toggle"
+                                class="icon-eye absolute top-1/2 -translate-y-1/2 transform cursor-pointer text-2xl text-zinc-500 hover:text-zinc-800 ltr:right-4 rtl:left-4"
+                                role="button"
+                                tabindex="0"
+                                onclick="togglePasswordVisibility('signup-password-confirmation', 'signup-password-confirmation-toggle')"
+                                aria-label="@lang('shop::app.customers.signup-form.show-password')"
+                            ></span>
+                        </div>
 
                         <x-shop::form.control-group.error control-name="password_confirmation" />
                     </x-shop::form.control-group>
@@ -278,6 +300,35 @@
 
     @push('scripts')
         {!! \Webkul\Customer\Facades\Captcha::renderJS() !!}
+
+        <script>
+            function togglePasswordVisibility(inputId, toggleId) {
+                const passwordField = document.getElementById(inputId);
+                const toggleIcon = document.getElementById(toggleId);
+
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    toggleIcon.classList.add('password-visible');
+                } else {
+                    passwordField.type = 'password';
+                    toggleIcon.classList.remove('password-visible');
+                }
+            }
+        </script>
+
+        <style>
+            .password-visible::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 20px;
+                height: 2px;
+                background: currentColor;
+                transform: translate(-50%, -50%) rotate(45deg);
+                pointer-events: none;
+            }
+        </style>
     @endpush
 
     <!-- Terms & Conditions Modal -->
