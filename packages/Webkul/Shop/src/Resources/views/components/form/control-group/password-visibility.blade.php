@@ -8,7 +8,7 @@
         id="v-password-visibility-template"
     >
         <div class="relative">
-            <slot :is-password-visible="isPasswordVisible"></slot>
+            <slot></slot>
 
             <button
                 type="button"
@@ -34,9 +34,17 @@
                 };
             },
 
+            mounted() {
+                this.inputElement = this.$el.querySelector('input');
+            },
+
             methods: {
                 toggleVisibility() {
                     this.isPasswordVisible = !this.isPasswordVisible;
+
+                    if (this.inputElement) {
+                        this.inputElement.type = this.isPasswordVisible ? 'text' : 'password';
+                    }
                 },
             },
         });

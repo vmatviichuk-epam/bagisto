@@ -32,7 +32,7 @@
         >
             <x-installer::form.control-group.password-visibility>
                 <input
-                    :type="isPasswordVisible ? 'text' : 'password'"
+                    type="password"
                     name="{{ $name }}"
                     v-bind="field"
                     :class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"

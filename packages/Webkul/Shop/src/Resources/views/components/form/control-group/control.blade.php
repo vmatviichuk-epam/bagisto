@@ -31,7 +31,7 @@
         >
             <x-shop::form.control-group.password-visibility>
                 <input
-                    :type="isPasswordVisible ? 'text' : 'password'"
+                    type="password"
                     name="{{ $name }}"
                     v-bind="field"
                     :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']"
