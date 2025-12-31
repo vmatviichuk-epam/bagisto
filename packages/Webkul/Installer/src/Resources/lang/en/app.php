@@ -629,6 +629,8 @@ return [
             ],
 
             'environment-configuration' => [
+                'hide-password'               => 'Hide password',
+                'show-password'               => 'Show password',
                 'algerian-dinar'              => 'Algerian Dinar (DZD)',
                 'allowed-currencies'          => 'Allowed Currencies',
                 'allowed-locales'             => 'Allowed Locales',

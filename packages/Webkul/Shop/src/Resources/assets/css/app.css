@@ -160,6 +160,10 @@ img.lazy {
         content: "\e918";
     }
 
+    .icon-eye-hide:before {
+        content: "\e945";
+    }
+
     .icon-filter-1:before {
         content: "\e919";
     }

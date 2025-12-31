@@ -7,7 +7,6 @@
     @case('hidden')
     @case('text')
     @case('email')
-    @case('password')
     @case('number')
         <v-field
             v-slot="{ field, errors }"
@@ -21,6 +20,24 @@
                 :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']"
                 {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'mb-1.5 w-full rounded-lg border px-5 py-3 text-base font-normal text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 max-sm:px-4 max-md:py-2 max-sm:text-sm']) }}
             >
+        </v-field>
+        @break
+
+    @case('password')
+        <v-field
+            v-slot="{ field, errors }"
+            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            name="{{ $name }}"
+        >
+            <x-shop::form.control-group.password-visibility>
+                <input
+                    :type="isPasswordVisible ? 'text' : 'password'"
+                    name="{{ $name }}"
+                    v-bind="field"
+                    :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']"
+                    {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'mb-1.5 w-full rounded-lg border px-5 py-3 text-base font-normal text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 max-sm:px-4 max-md:py-2 max-sm:text-sm ltr:pr-12 rtl:pl-12']) }}
+                >
+            </x-shop::form.control-group.password-visibility>
         </v-field>
         @break
 
