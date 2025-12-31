@@ -12,7 +12,8 @@
 
             <button
                 type="button"
-                class="absolute top-1/2 -translate-y-1/2 flex items-center justify-center text-2xl text-gray-600 transition-colors hover:text-gray-800 ltr:right-4 rtl:left-4"
+                class="absolute top-1/2 -translate-y-1/2 flex items-center justify-center text-2xl text-gray-600 transition-colors hover:text-gray-800"
+                :style="isRtl ? 'left: 1rem' : 'right: 1rem'"
                 :aria-label="isPasswordVisible ? '@lang('shop::app.components.form.password-visibility.hide-password')' : '@lang('shop::app.components.form.password-visibility.show-password')'"
                 @click="toggleVisibility"
             >
@@ -32,6 +33,12 @@
                 return {
                     isPasswordVisible: false,
                 };
+            },
+
+            computed: {
+                isRtl() {
+                    return document.documentElement.dir === 'rtl';
+                },
             },
 
             mounted() {
